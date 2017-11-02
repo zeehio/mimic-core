@@ -18,7 +18,7 @@ matrix:
         - export PATH="`pwd`/build:${PATH}"
         - wget https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip && unzip -q ninja-linux.zip -d build
         - pip3 install --user meson
-      addons: {apt: {packages: [libasound2-dev, python3-pip, pkg-config]}}
+      addons: {apt: {packages: [libasound2-dev, python3-pip, pkg-config]}, coverity_scan: {project: {name: "zeehio/mimic-core", description: "Core text to speech for mycroft"}, notification_email: sergioller@gmail.com, build_command_prepend: meson build_cov_scan --prefix="$PWD/install", build_command: ninja -C build_cov_scan test install, branch_pattern: coverity_scan}}
     - env: TASK="coverage"
       os: linux
       dist: "trusty"
@@ -74,15 +74,4 @@ env:
    #   via the "travis encrypt" command using the project repo's public key
    - secure: "QbdpMh43MSihNaMj/3RzsXX6PqXa0vKpyjJ1o08XQlmREJYGaAz3baPTF+Ndmppq+sDcihcsq3+ItH4s1BMCP+Ntz2Qs+GJbsPSdbZeFhXUNRlx8dsF8OFt1CbIRPjU9DElWJ/mRrIHo1r7XaheFhbcH7jQk6L5tcPqtkDiE7vhF8c19ALHm/XF00hiw2eoraMSXvic78vjqAIQniS9hHkeeF+ouIekna+k6NzIf4eyOExsmV61b1tv8uhkDEJecv//+T/X1eRJbghzSUoNfBz6ndf1YOwybfaQhhoCGfQRYuE1aqRFcgjQyQfON4m2g2l5E2XX4z2qUGgXnjI8zo0truRxMtNZHXT2uJuFifNKQGmBdlJdP5VZX2pHkx1MM1qqg8zfClPRhgZ9MsseOme5AW/MUP4hlU8u+w+5A6+PLnKkC7oAuQt9vGh+IC2sOxYIlC+ZH6U3AGE5vl2sas+13WMVMtLOPMbrkjSapoYt9oP+uvH2K6AI8bD2r2Hxsf/sxw9QrWCwvw9Bp1/13bFCbK1sF8p0c0fJCI0uSCf+RVxzApDW/KLZdLm7p6TzcY028grYatK7uVLE+MTJh85v8+S4U42veGmdQYFf9DDRN7RzZLyYEFp98tGWrOi0YhDoKOuEKRifXBu6V56HBWV/JaQdcrHgLQC852OVVuLk="
 
-
-
-addons:
-  coverity_scan:
-    project:
-      name: "zeehio/mimic-core"
-      description: "Core text to speech for mycroft"
-    notification_email: sergioller@gmail.com
-    build_command_prepend: meson build_cov_scan --prefix="$PWD/install"
-    build_command: ninja -C build_cov_scan test install
-    branch_pattern: coverity_scan
 
